@@ -77,7 +77,7 @@ function Register() {
         />
       </div>
       <div>
-        <label htmlFor="password">Friend ID:</label>
+        <label htmlFor="password">Password:</label>
         <input
           type="password"
           id="password"

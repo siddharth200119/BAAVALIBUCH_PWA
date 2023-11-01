@@ -5,7 +5,7 @@ var fs = require("fs")
 const cors = require('cors');
 var path = require("path")
 var multer = require("multer")
-var registerRoute = require("./API_Routes/registerRoute.js")
+var User = require("./mongoose models/User.js")
 require("dotenv").config();
 
 //creating server
@@ -46,4 +46,14 @@ app.get("/", function(req, res){
 app.post("/api/register", upload.single('image'), function(req, res){
     res.send(req.body.pass)
     console.log(req.body.pass)
+    const newUser = new User({
+      ID: req.body.ID, 
+      pass: req.body.pass, 
+      friendID: req.body.friendID,
+      image: {
+        data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
+        contentType: 'image/png'
+      }
+    })
+    newUser.save()
 })

@@ -1,6 +1,4 @@
-var express = require("express")
 var mongoose = require("mongoose")
-const app = express.Router()
 
 const userSchema = new mongoose.Schema({
     ID: {
@@ -20,11 +18,6 @@ const userSchema = new mongoose.Schema({
     }
 })
 
-const user = mongoose.model("User", userSchema)
+const User = mongoose.model("User", userSchema)
 
-app.post("/register", function(req, res){
-    res.send(req.body)
-    console.log(req.body)
-})
-
-module.exports = app;
+module.exports = User
