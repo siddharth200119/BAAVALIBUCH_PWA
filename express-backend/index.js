@@ -44,10 +44,16 @@ app.get("/", function(req, res){
 //-------------------------------------------- API --------------------------------------------
 
 app.post("/api/register", upload.single('image'), async function(req, res){
+
+    const friend = await User.findOne({ID: req.body.friendID}).exec()
+    var friendIDs = []
+    if(friend != null){
+      friendIDs = [friend._id]
+    }
     const newUser = new User({
       ID: req.body.ID, 
       pass: req.body.pass, 
-      friendID: req.body.friendID,
+      friendID: friendIDs,
       image: {
         data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
         contentType: 'image/png'

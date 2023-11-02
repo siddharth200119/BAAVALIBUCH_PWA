@@ -13,9 +13,7 @@ const userSchema = new mongoose.Schema({
         data: Buffer,
         contentType: String
     },
-    friendID: {
-        type: String
-    }
+    friendID: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}]
 })
 
 const User = mongoose.model("User", userSchema)
