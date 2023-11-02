@@ -43,9 +43,7 @@ app.get("/", function(req, res){
 
 //-------------------------------------------- API --------------------------------------------
 
-app.post("/api/register", upload.single('image'), function(req, res){
-    res.send(req.body.pass)
-    console.log(req.body.pass)
+app.post("/api/register", upload.single('image'), async function(req, res){
     const newUser = new User({
       ID: req.body.ID, 
       pass: req.body.pass, 
@@ -55,5 +53,29 @@ app.post("/api/register", upload.single('image'), function(req, res){
         contentType: 'image/png'
       }
     })
-    newUser.save()
+    try{
+      savedUser = await newUser.save()
+      res.status(200).json(savedUser)
+    } catch(err){
+      res.status(500).json({error: err})
+    }
+      
+})
+
+app.post("/api/login", async function(req, res){
+  const ID = req.body.ID
+  const pass = req.body.pass
+
+  const user = await User.findOne({ID: req.body.ID}).exec()
+  if(user != null){
+    if(user.pass == pass){
+      res.send(user)
+    }
+    else{
+      res.send({"message": "incorrect password"})
+    }
+  }
+  else{
+    res.send({"message": "incorrect user name"})
+  }
 })
