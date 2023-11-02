@@ -59,8 +59,12 @@ app.post("/api/register", upload.single('image'), async function(req, res){
         contentType: 'image/png'
       }
     })
+
     try{
       savedUser = await newUser.save()
+      if(friend != null){
+        const updatedFriend = await User.updateOne({_id: friend._id}, {$push: {friendID: savedUser._id}})
+      }   
       res.status(200).json(savedUser)
     } catch(err){
       res.status(500).json({error: err})
