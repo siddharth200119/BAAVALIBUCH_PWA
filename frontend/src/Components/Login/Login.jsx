@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import "./Login.css"
 
 const apiUrl = 'http://localhost:3000/api/login';
 
@@ -39,12 +40,16 @@ function Register() {
   };
 
   return (
+    <div className='login_page'>
+    <div className='loginFormContainer'>
+      <h1 className='heading'>Login</h1>
     <form onSubmit={handleFormSubmit}>
       <div>
         <label htmlFor="ID">ID:</label>
         <input
           type="text"
           id="ID"
+          placeholder='Elon Musk'
           value={ID}
           onChange={handleIDChange}
         />
@@ -54,6 +59,7 @@ function Register() {
         <input
           type="password"
           id="password"
+          placeholder='Password'
           value={pass}
           onChange={handlePassChange}
         />
@@ -62,6 +68,8 @@ function Register() {
         <button type="submit">Submit</button>
       </div>
     </form>
+    </div>
+    </div>
   );
 }
 

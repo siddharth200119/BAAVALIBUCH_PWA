@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import "./Register.css"
 
 const apiUrl = 'http://localhost:3000/api/register';
 
@@ -48,9 +49,42 @@ function Register() {
   };
 
   return (
+    <div className='register_page'>
+    <div className='formContainer'>
+    <h1 className='heading'>Register</h1>
     <form onSubmit={handleFormSubmit}>
       <div>
-        <label htmlFor="imageUpload">Image:</label>
+        <label htmlFor="ID">Enter ID</label>
+        <input
+          type="text"
+          placeholder='Elon Musk'
+          id="ID"
+          value={ID}
+          onChange={handleIDChange}
+        />
+      </div>
+      <div>
+        <label htmlFor="friendID">Friend ID</label>
+        <input
+          type="text"
+          id="friendID"
+          placeholder='Mark Zuckerberg'
+          value={friendID}
+          onChange={handleFriendIDChange}
+        />
+      </div>
+      <div>
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          placeholder='Password'
+          value={pass}
+          onChange={handlePassChange}
+        />
+      </div>
+      <div>
+        <label htmlFor="imageUpload">Profile Picture</label>
         <input
           type="file"
           id="imageUpload"
@@ -58,37 +92,10 @@ function Register() {
           onChange={handleImageChange}
         />
       </div>
-      <div>
-        <label htmlFor="ID">ID:</label>
-        <input
-          type="text"
-          id="ID"
-          value={ID}
-          onChange={handleIDChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="friendID">Friend ID:</label>
-        <input
-          type="text"
-          id="friendID"
-          value={friendID}
-          onChange={handleFriendIDChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          id="password"
-          value={pass}
-          onChange={handlePassChange}
-        />
-      </div>
-      <div>
         <button type="submit">Submit</button>
-      </div>
     </form>
+    </div>
+    </div>
   );
 }
 
