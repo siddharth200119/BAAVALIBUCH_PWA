@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import "./Login.css"
+import { useNavigate } from 'react-router-dom';
 
 const apiUrl = 'http://localhost:3000/api/login';
 
 function Register() {
   const [ID, setID] = useState('');
   const [pass, setPass] = useState('');
+  const navigate = useNavigate();
 
   const handleIDChange = (e) => {
     setID(e.target.value);
@@ -22,19 +24,16 @@ function Register() {
       ID: ID,
       pass: pass
     }
-
     fetch(apiUrl, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(formData),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('Server Response:', data);
-      })
-      .catch((error) => {
+    }).then((response) => response.json()).then((data) => {
+        console.log('Server Response:', data._id);
+        return navigate('/users/' + data._id);
+      }).catch((error) => {
         console.error('Error sending data to server:', error);
       });
   };

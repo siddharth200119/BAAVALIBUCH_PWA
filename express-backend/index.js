@@ -89,3 +89,13 @@ app.post("/api/login", async function(req, res){
     res.send({"message": "incorrect user name"})
   }
 })
+
+app.get("/api/userinfo/:userID", async function(req, res){
+  const userID = req.params.userID
+  const user = await User.findById(userID).exec()
+  if(user != null){
+    res.send(user)
+  }else{
+    res.send({"message": "user not found"})
+  }
+})
