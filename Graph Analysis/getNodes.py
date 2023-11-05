@@ -17,5 +17,3 @@ final_map ={}
 
 for key, value in friends_map.items():
     final_map[users_map[key]] = [users_map[user_id] for user_id in value]
-
-print(final_map)
